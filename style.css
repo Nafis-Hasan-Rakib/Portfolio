@@ -680,7 +680,10 @@ section{
     word-break: break-word;
   }
   
-  
+    .contact .content .row .card.number-card {
+    width: 350px; /* Adjust the width if needed */
+    word-break: break-word;
+  }
   
   .contact-form{
     background: #fff;

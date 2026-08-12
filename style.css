@@ -960,17 +960,16 @@ header.scrolled .nav-container {
     align-items: center;
     margin-bottom: 16px;
     font-family: var(--font-mono);
-    font-size: 0.82rem;
-    gap: 10px;
+    font-size: 0.8rem;
 }
 
 .cert-issuer, .edu-institution {
-    color: var(--accent-cyan);
+    color: var(--accent-green);
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     display: inline-flex;
     align-items: center;
-    gap: 7px;
+    gap: 6px;
 }
 
 .cert-issuer i, .edu-institution i {
@@ -978,26 +977,9 @@ header.scrolled .nav-container {
 }
 
 .cert-year, .edu-year {
-    color: var(--text-secondary);
+    color: var(--text-muted);
     font-family: var(--font-mono);
-    font-size: 0.76rem;
-    padding: 3px 10px;
-    border-radius: var(--radius-full);
-    border: 1px solid rgba(0, 242, 254, 0.25);
-    background: rgba(0, 242, 254, 0.04);
-    letter-spacing: 0.3px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    white-space: nowrap;
-    transition: all var(--transition-fast);
-}
-
-.cert-year:hover, .edu-year:hover {
-    border-color: var(--accent-cyan);
-    color: var(--accent-cyan);
-    background: rgba(0, 242, 254, 0.1);
-    box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+    font-size: 0.8rem;
 }
 
 .cert-name {

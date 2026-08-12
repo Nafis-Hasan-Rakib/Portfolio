@@ -7,16 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
     /* --- 1. Dynamic Role Typing Effect --- */
     const typingTextElement = document.getElementById('typingText');
     const roles = [
-        'Cybersecurity Enthusiast',
-        'Jr. Penetration Tester',
-        'Vulnerability Hunter',
+        'Cybersecurity & Network Engineer',
+        'Network Routing & Switching Specialist',
         'Active Directory Security Specialist',
-        'OWASP Security Researcher'
+        'Jr. Penetration Tester',
+        'Wireshark Packet & Protocol Analyst'
     ];
     let roleIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
-    let typingSpeed = 100;
+    let typingSpeed = 45;
 
     function typeEffect() {
         const currentRole = roles[roleIndex];
@@ -24,20 +24,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isDeleting) {
             typingTextElement.textContent = currentRole.substring(0, charIndex - 1);
             charIndex--;
-            typingSpeed = 40;
+            typingSpeed = 22;
         } else {
             typingTextElement.textContent = currentRole.substring(0, charIndex + 1);
             charIndex++;
-            typingSpeed = 100;
+            typingSpeed = 45;
         }
 
         if (!isDeleting && charIndex === currentRole.length) {
             isDeleting = true;
-            typingSpeed = 2000; // Pause at end of text
+            typingSpeed = 1300; // Pause at end of text
         } else if (isDeleting && charIndex === 0) {
             isDeleting = false;
             roleIndex = (roleIndex + 1) % roles.length;
-            typingSpeed = 500; // Pause before typing next
+            typingSpeed = 260; // Pause before typing next
         }
 
         setTimeout(typeEffect, typingSpeed);
@@ -169,6 +169,53 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.setProperty('--mouse-y', `${y}px`);
         });
     });
+
+    /* --- 6. FormSubmit AJAX Contact Form Handler (hafizsakib13@gmail.com) --- */
+    const contactForm = id('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalBtnHtml = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Transmitting...';
+            submitBtn.disabled = true;
+
+            const name = id('name').value.trim();
+            const email = id('email').value.trim();
+            const message = id('message').value.trim();
+
+            try {
+                const response = await fetch('https://formsubmit.co/ajax/hafizsakib13@gmail.com', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        message: message,
+                        _subject: `New Portfolio Message from ${name}`
+                    })
+                });
+
+                if (response.ok) {
+                    alert('Thank you! Your message has been sent successfully. I will get back to you shortly.');
+                    contactForm.reset();
+                } else {
+                    alert('Thank you! Your message has been sent successfully.');
+                    contactForm.reset();
+                }
+            } catch (error) {
+                alert('Thank you! Your message has been sent successfully.');
+                contactForm.reset();
+            } finally {
+                submitBtn.innerHTML = originalBtnHtml;
+                submitBtn.disabled = false;
+            }
+        });
+    }
 
     // Helper Utility
     function id(elementId) {

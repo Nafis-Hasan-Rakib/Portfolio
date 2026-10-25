@@ -637,89 +637,21 @@
                 <div class="contact-form-card glass-card">
                     <h3 class="form-title"><i class="fas fa-paper-plane"></i> Send a Direct Message</h3>
                     <form id="contactForm">
-                        <!-- Replace YOUR_WEB3FORMS_ACCESS_KEY with your key from Web3Forms. -->
-                        <input
-                            type="hidden"
-                            name="access_key"
-                            value="5e79ddb7-e999-45f6-95b6-fc1f926bf033"
-                        >
-                        <input
-                            type="hidden"
-                            name="subject"
-                            value="New Portfolio Contact Message"
-                        >
-                        <input
-                            type="hidden"
-                            name="from_name"
-                            value="NafisPhantomX Portfolio"
-                        >
-
-                        <!-- Honeypot field: helps filter basic spam bots. -->
-                        <input
-                            type="checkbox"
-                            name="botcheck"
-                            tabindex="-1"
-                            autocomplete="off"
-                            style="display: none;"
-                        >
-
                         <div class="form-group">
-                            <label for="contactName">Your Name</label>
-                            <input
-                                type="text"
-                                id="contactName"
-                                name="name"
-                                autocomplete="name"
-                                required
-                                placeholder="John Doe"
-                                maxlength="100"
-                            >
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required placeholder="John Doe">
                         </div>
                         <div class="form-group">
-                            <label for="contactEmail">Your Email</label>
-                            <input
-                                type="email"
-                                id="contactEmail"
-                                name="email"
-                                autocomplete="email"
-                                required
-                                placeholder="john@example.com"
-                                maxlength="254"
-                            >
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" name="email" required placeholder="john@example.com">
                         </div>
                         <div class="form-group">
-                            <label for="contactAddress">Address (optional)</label>
-                            <input
-                                type="text"
-                                id="contactAddress"
-                                name="address"
-                                autocomplete="street-address"
-                                placeholder="Your address (optional)"
-                                maxlength="250"
-                            >
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Briefly describe your project, networking requirement, or inquiry..."></textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="contactMessage">Message</label>
-                            <textarea
-                                id="contactMessage"
-                                name="message"
-                                rows="5"
-                                required
-                                placeholder="Briefly describe your project, networking requirement, or inquiry..."
-                                maxlength="5000"
-                            ></textarea>
-                        </div>
-
-                        <button type="submit" id="contactSubmitBtn" class="btn btn-primary btn-block">
+                        <button type="submit" class="btn btn-primary btn-block">
                             <i class="fas fa-paper-plane"></i> Transmit Message
                         </button>
-                        <p
-                            id="contactFormStatus"
-                            class="form-status"
-                            role="status"
-                            aria-live="polite"
-                            style="margin-top: 1rem;"
-                        ></p>
                     </form>
                 </div>
             </div>
@@ -749,6 +681,6 @@
     </button>
 
     <!-- Custom JavaScript -->
-    <script src="script-updated.js" defer></script>
+    <script src="script.js"></script>
 </body>
 </html>

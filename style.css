@@ -561,6 +561,56 @@ header.scrolled .nav-container {
     color: var(--text-secondary);
 }
 
+
+
+/* =========================================================
+   Contact Form Status Notification
+   ========================================================= */
+
+.form-status {
+    margin-top: 16px;
+    padding: 14px 16px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+    animation: statusFadeIn 0.25s ease;
+}
+
+.form-status[hidden] {
+    display: none;
+}
+
+.form-status.success {
+    color: #86efac;
+    background: rgba(34, 197, 94, 0.10);
+    border-color: rgba(34, 197, 94, 0.30);
+}
+
+.form-status.error {
+    color: #fca5a5;
+    background: rgba(239, 68, 68, 0.10);
+    border-color: rgba(239, 68, 68, 0.30);
+}
+
+#contactForm button[type="submit"]:disabled {
+    opacity: 0.7;
+    cursor: wait;
+}
+
+@keyframes statusFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
 /* --- Section Titles --- */
 .section-header {
     text-align: center;
@@ -1755,5 +1805,7 @@ header.scrolled .nav-container {
 
     .stat-number {
         font-size: 1.45rem;
+       
     }
 }
+

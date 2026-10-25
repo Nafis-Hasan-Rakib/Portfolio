@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* --- 1. Dynamic Role Typing Effect --- */
     const typingTextElement = document.getElementById('typingText');
+
     const roles = [
         'Cybersecurity & Network Engineer',
         'Network Routing & Switching Specialist',
@@ -133,11 +134,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 stat.getAttribute('data-target'),
                 10
             );
+
             const suffix = stat.getAttribute('data-suffix') || '';
             const duration = 2000;
             const stepTime = 30;
             const steps = duration / stepTime;
             const increment = target / steps;
+
             let current = 0;
 
             const timer = setInterval(() => {
@@ -186,43 +189,45 @@ document.addEventListener('DOMContentLoaded', () => {
     const contactForm = id('contactForm');
 
     if (contactForm) {
+        const statusBox = id('formStatus');
+        const submitBtn = contactForm.querySelector(
+            'button[type="submit"]'
+        );
+
         contactForm.addEventListener('submit', async e => {
             e.preventDefault();
 
-            const submitBtn = contactForm.querySelector(
-                'button[type="submit"]'
-            );
-
-            if (!submitBtn) return;
-
-            const originalBtnHtml = submitBtn.innerHTML;
-            const name = id('name')?.value.trim() || '';
-            const email = id('email')?.value.trim() || '';
-            const message = id('message')?.value.trim() || '';
-
-            if (!name || !email || !message) {
-                alert('Please complete all fields before sending your message.');
+            if (!statusBox || !submitBtn) {
+                console.error(
+                    'Contact form status element or submit button is missing.'
+                );
                 return;
             }
+
+            const originalBtnHtml = submitBtn.innerHTML;
+
+            statusBox.hidden = true;
+            statusBox.className = 'form-status';
+            statusBox.textContent = '';
 
             submitBtn.disabled = true;
             submitBtn.innerHTML =
                 '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
-            const formData = new FormData();
+            const formData = new FormData(contactForm);
 
-            // Web3Forms access key
-            formData.append(
+            formData.set(
                 'access_key',
                 '5e79ddb7-e999-45f6-95b6-fc1f926bf033'
             );
 
-            formData.append('name', name);
-            formData.append('email', email);
-            formData.append('message', message);
-            formData.append(
+            const senderName = String(
+                formData.get('name') || 'Portfolio Visitor'
+            );
+
+            formData.set(
                 'subject',
-                `New Portfolio Message from ${name}`
+                `New Portfolio Message from ${senderName}`
             );
 
             try {
@@ -237,31 +242,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
 
                 if (response.ok && result.success) {
-                    alert(
-                        'Message sent successfully! Thank you for contacting me.'
-                    );
+                    statusBox.classList.add('success');
+                    statusBox.textContent =
+                        '✓ Message sent successfully! Thank you for contacting me.';
+
                     contactForm.reset();
                 } else {
-                    console.error(
-                        'Web3Forms submission failed:',
-                        result
-                    );
+                    console.error('Web3Forms submission failed:', result);
 
-                    alert(
-                        'Your message could not be sent. ' +
+                    statusBox.classList.add('error');
+                    statusBox.textContent =
+                        'Unable to send your message. ' +
                         (result.message ||
-                        'Please check your Web3Forms access key and settings, then try again.')
-                    );
+                            'Please check your settings and try again.');
                 }
             } catch (error) {
                 console.error('Web3Forms request error:', error);
 
-                alert(
-                    'A network error occurred. Please check your internet connection and try again.'
-                );
+                statusBox.classList.add('error');
+                statusBox.textContent =
+                    'A connection error occurred. Please check your internet connection and try again.';
             } finally {
-                submitBtn.innerHTML = originalBtnHtml;
+                statusBox.hidden = false;
                 submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnHtml;
             }
         });
     }

@@ -637,6 +637,7 @@
                 <div class="contact-form-card glass-card">
                     <h3 class="form-title"><i class="fas fa-paper-plane"></i> Send a Direct Message</h3>
                     <form id="contactForm">
+                        <input type="hidden" name="access_key" value="5e79ddb7-e999-45f6-95b6-fc1f926bf033">
                         <div class="form-group">
                             <label for="name">Your Name</label>
                             <input type="text" id="name" name="name" required placeholder="John Doe">
@@ -648,6 +649,9 @@
                         <div class="form-group">
                             <label for="message">Message</label>
                             <textarea id="message" name="message" rows="5" required placeholder="Briefly describe your project, networking requirement, or inquiry..."></textarea>
+                        </div>
+                        <div class="h-captcha-container">
+                            <div class="h-captcha" data-captcha="true" data-theme="dark"></div>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">
                             <i class="fas fa-paper-plane"></i> Transmit Message
@@ -680,6 +684,9 @@
     <button class="back-to-top" id="backToTop" aria-label="Scroll to top">
         <i class="fas fa-arrow-up"></i>
     </button>
+
+    <!-- Web3Forms Client Script for hCaptcha -->
+    <script src="https://web3forms.com/client/script.js" async defer></script>
 
     <!-- Custom JavaScript -->
     <script src="script.js"></script>

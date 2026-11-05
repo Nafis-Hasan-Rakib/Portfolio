@@ -204,6 +204,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            // Client-side verification for hCaptcha
+            const hCaptchaResponse = contactForm.querySelector('[name="h-captcha-response"]')?.value;
+            if (!hCaptchaResponse) {
+                statusBox.hidden = false;
+                statusBox.className = 'form-status error';
+                statusBox.textContent = 'Please complete the hCaptcha verification before transmitting your message.';
+                return;
+            }
+
             const originalBtnHtml = submitBtn.innerHTML;
 
             statusBox.hidden = true;
@@ -215,6 +224,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
             const formData = new FormData(contactForm);
+
+            if (hCaptchaResponse && !formData.get('h-captcha-response')) {
+                formData.set('h-captcha-response', hCaptchaResponse);
+            }
 
             formData.set(
                 'access_key',
@@ -247,6 +260,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         '✓ Message sent successfully! Thank you for contacting me.';
 
                     contactForm.reset();
+                    if (window.hcaptcha && typeof window.hcaptcha.reset === 'function') {
+                        window.hcaptcha.reset();
+                    }
                 } else {
                     console.error('Web3Forms submission failed:', result);
 
@@ -255,6 +271,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         'Unable to send your message. ' +
                         (result.message ||
                             'Please check your settings and try again.');
+
+                    if (window.hcaptcha && typeof window.hcaptcha.reset === 'function') {
+                        window.hcaptcha.reset();
+                    }
                 }
             } catch (error) {
                 console.error('Web3Forms request error:', error);
@@ -262,6 +282,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 statusBox.classList.add('error');
                 statusBox.textContent =
                     'A connection error occurred. Please check your internet connection and try again.';
+
+                if (window.hcaptcha && typeof window.hcaptcha.reset === 'function') {
+                    window.hcaptcha.reset();
+                }
             } finally {
                 statusBox.hidden = false;
                 submitBtn.disabled = false;

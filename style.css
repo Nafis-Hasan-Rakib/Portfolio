@@ -1213,6 +1213,14 @@ header.scrolled .nav-container {
     box-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
 }
 
+.h-captcha-container {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+}
+
 /* --- Footer --- */
 .footer {
     padding: 40px 0;
@@ -1750,6 +1758,12 @@ header.scrolled .nav-container {
     .form-group input, .form-group textarea {
         padding: 9px 12px;
         font-size: 0.86rem;
+    }
+
+    .h-captcha-container {
+        margin-bottom: 16px;
+        transform: scale(0.92);
+        transform-origin: center center;
     }
 
     /* Footer */
